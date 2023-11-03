@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Amplitude Modulation</title>
 </head>
+
 <body>
-AM
+    <!--
+        CARRIER CHART
+    -->
+    <div style="max-width: 40%; max-height: 40%">
+        <canvas id="carrier_chart" style="width:100%; max-height: 400px"></canvas>
+        <label>
+            Frequency:
+            <output id="carrier_frequency_output">500 Hz</output>
+            <br/>
+            <input type="range" min="100" max="1000" value="500" step="1" style="width: 100%"
+                   id="carrier_frequency_input">
+        </label>
+    </div>
+
+
+
+
+
+    <!-- Chart.js source script -->
+    <script src="../ExternalSources/JavaScript/chart.umd.min.js"></script>
+    <!-- jQuery source script -->
+    <script src="../ExternalSources/JavaScript/jquery-3.7.1.min.js"></script>
+    <!-- My scripts -->
+    <script src="amplitude_modulation.js"></script>
 </body>
+
 </html>

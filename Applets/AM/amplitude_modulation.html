@@ -5,22 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="../css/stylesheet.css">
+
     <title>Amplitude Modulation</title>
 </head>
 
 <body>
-    <!--
-        CARRIER CHART
-    -->
-    <div style="max-width: 40%; max-height: 40%">
-        <canvas id="carrier_chart" style="width:100%; max-height: 400px"></canvas>
-        <label>
-            Frequency:
-            <output id="carrier_frequency_output">500 Hz</output>
-            <br/>
-            <input type="range" min="100" max="1000" value="500" step="1" style="width: 100%"
-                   id="carrier_frequency_input">
-        </label>
+
+    <div class="column left">
+        <!--
+            CARRIER CHART
+        -->
+        <div class="chart_div">
+            <canvas id="carrier_chart" class="my_chart_style"></canvas>
+
+            <div class="parameters_div">
+                <label class="div_name">PARAMETERS</label>
+                <br/>
+                <div class="parameters_inside_div">
+                    Frequency:
+                    <output id="carrier_frequency_output">500 Hz</output>
+                    <br/>
+                    <input type="range" min="100" max="1000" value="500" step="1" style="width: 100%"
+                           id="carrier_frequency_input">
+                </div>
+            </div>
+        </div>
+
+        <!--
+            MODULATING SIGNAL CHART
+        -->
+        <div class="chart_div" style="margin-top: 10px">
+            <canvas id="modulating_chart" class="my_chart_style"></canvas>
+
+            <div class="parameters_div">
+                <label class="div_name">PARAMETERS</label>
+                <br/>
+                <div class="parameters_inside_div">
+                    Waveform:
+                    <select id="modulating_waveform_input">
+                        <option>sinus</option>
+                        <!--                    <option>triangle</option>-->
+                        <!--                    <option>rectangle</option>-->
+                    </select>
+
+                    <br/>
+
+                    Frequency:
+                    <output id="modulating_frequency_output">2500 Hz</output>
+                    <br/>
+                    <input type="range" min="1000" max="5000" value="2500" step="1" style="width: 100%"
+                           id="modulating_frequency_input">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="column middle">
+        <!--
+            MIDDLE SECTION
+        -->
+        <div class="middle_div">
+
+        </div>
+    </div>
+
+    <div class="column right">
+
     </div>
 
 
@@ -28,9 +80,9 @@
 
 
     <!-- Chart.js source script -->
-    <script src="../ExternalSources/JavaScript/chart.umd.min.js"></script>
+    <script src="../ExternalResources/JavaScript/chart.umd.min.js"></script>
     <!-- jQuery source script -->
-    <script src="../ExternalSources/JavaScript/jquery-3.7.1.min.js"></script>
+    <script src="../ExternalResources/JavaScript/jquery-3.7.1.min.js"></script>
     <!-- My scripts -->
     <script src="amplitude_modulation.js"></script>
 </body>

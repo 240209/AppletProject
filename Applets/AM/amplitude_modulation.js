@@ -9,7 +9,7 @@ const carrier_chart = new Chart("carrier_chart", {
     data: {
         labels: carrier_x_values,
         datasets: [{
-            label: "carrier signal",
+            label: "nosný signál",
             fill: false,
             pointStyle: false,
             borderWidth: 2,
@@ -23,7 +23,7 @@ const carrier_chart = new Chart("carrier_chart", {
         plugins: {
             title: {
                 display: true,
-                text: 'Carrier signal',
+                text: 'Nosný signál',
                 color: 'rgb(0, 0, 0)',
                 font: { size: 26 }
             },
@@ -34,7 +34,7 @@ const carrier_chart = new Chart("carrier_chart", {
                 display: true,
                 title: {
                     display: true,
-                    text: "time [ms]"
+                    text: "čas [ms]"
                 },
                 ticks: {
                     callback: (index) => {
@@ -61,7 +61,7 @@ const modulating_chart = new Chart("modulating_chart", {
     data: {
         labels: modulating_x_values,
         datasets: [{
-            label: "modulating signal",
+            label: "modulační signál",
             fill: false,
             pointStyle: false,
             borderWidth: 2,
@@ -75,7 +75,7 @@ const modulating_chart = new Chart("modulating_chart", {
         plugins: {
             title: {
                 display: true,
-                text: 'Modulating signal',
+                text: 'Modulační signál',
                 color: 'rgb(0, 0, 0)',
                 font: { size: 26 }
             },
@@ -86,7 +86,7 @@ const modulating_chart = new Chart("modulating_chart", {
                 display: true,
                 title: {
                     display: true,
-                    text: "time [ms]"
+                    text: "čas [ms]"
                 },
                 ticks: {
                     callback: (index) => {

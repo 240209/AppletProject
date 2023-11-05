@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="../css/stylesheet.css">
 
-    <title>Amplitude Modulation</title>
+    <title>Amplitudová modulace</title>
 </head>
 
 <body>
@@ -20,10 +20,10 @@
             <canvas id="carrier_chart" class="my_chart_style"></canvas>
 
             <div class="parameters_div">
-                <label class="l2_div_name">PARAMETERS</label>
+                <label class="l2_div_name">PARAMETRY</label>
                 <br/>
                 <div class="parameters_inside_div">
-                    Frequency:
+                    Frekvence:
                     <output id="carrier_frequency_output">500 Hz</output>
                     <br/>
                     <input type="range" min="100" max="1000" value="500" step="1" style="width: 100%"
@@ -39,19 +39,19 @@
             <canvas id="modulating_chart" class="my_chart_style"></canvas>
 
             <div class="parameters_div">
-                <label class="l2_div_name">PARAMETERS</label>
+                <label class="l2_div_name">PARAMETRY</label>
                 <br/>
                 <div class="parameters_inside_div">
-                    Waveform:
+                    Tvar signálu:
                     <select id="modulating_waveform_input">
                         <option>sinus</option>
-                        <!--                    <option>triangle</option>-->
-                        <!--                    <option>rectangle</option>-->
+                        <!--                    <option>trojúhelník</option>-->
+                        <!--                    <option>obdélník</option>-->
                     </select>
 
                     <br/>
 
-                    Frequency:
+                    Frekvence:
                     <output id="modulating_frequency_output">2500 Hz</output>
                     <br/>
                     <input type="range" min="1000" max="5000" value="2500" step="1" style="width: 100%"

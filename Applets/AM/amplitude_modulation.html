@@ -17,25 +17,6 @@
             CARRIER SIGNAL CHART
         -->
         <div class="chart_div">
-            <canvas id="carrier_chart" class="my_chart_style"></canvas>
-
-            <div class="parameters_div">
-                <label class="l2_div_name">PARAMETRY</label>
-                <br/>
-                <div class="parameters_inside_div">
-                    Frekvence:
-                    <output id="carrier_frequency_output">500 Hz</output>
-                    <br/>
-                    <input type="range" min="100" max="1000" value="500" step="1" style="width: 100%"
-                           id="carrier_frequency_input">
-                </div>
-            </div>
-        </div>
-
-        <!--
-            MODULATING SIGNAL CHART
-        -->
-        <div class="chart_div">
             <canvas id="modulating_chart" class="my_chart_style"></canvas>
 
             <div class="parameters_div">
@@ -52,10 +33,29 @@
                     <br/>
 
                     Frekvence:
-                    <output id="modulating_frequency_output">2500 Hz</output>
+                    <output id="modulating_frequency_output">250 Hz</output>
+                    <br/>
+                    <input type="range" min="100" max="1000" value="250" step="1" style="width: 100%"
+                           id="modulating_frequency_input">
+                </div>
+            </div>
+        </div>
+
+        <!--
+            MODULATING SIGNAL CHART
+        -->
+        <div class="chart_div">
+            <canvas id="carrier_chart" class="my_chart_style"></canvas>
+
+            <div class="parameters_div">
+                <label class="l2_div_name">PARAMETRY</label>
+                <br/>
+                <div class="parameters_inside_div">
+                    Frekvence:
+                    <output id="carrier_frequency_output">2500 Hz</output>
                     <br/>
                     <input type="range" min="1000" max="5000" value="2500" step="1" style="width: 100%"
-                           id="modulating_frequency_input">
+                           id="carrier_frequency_input">
                 </div>
             </div>
         </div>
@@ -67,12 +67,35 @@
             MODULATION PARAMETERS
         -->
         <div class="process_parameters_div">
+            <label class="l2_div_name">PARAMETRY MODULACE</label>
+            <br/>
+            <div class="parameters_inside_div">
+                Hloubka modulace:
+                <output id="modulation_depth_output">0.50</output>
+                <br/>
+                <input type="range" min="0" max="4" value="0.5" step="0.01" style="width: 100%"
+                       id="modulation_depth_input">
 
+                <br/>
+
+                Typ modulace:
+                <select id="modulation_type_input">
+                    <option>DSB</option>
+<!--                                        <option>DSB-SC</option>-->
+<!--                                        <option>SSB</option>-->
+<!--                                        <option>SSB-SC</option>-->
+                </select>
+            </div>
         </div>
     </div>
 
     <div class="column right">
-
+        <!--
+            MODULATED SIGNAL CHART
+        -->
+        <div class="chart_div">
+            <canvas id="modulated_chart" class="my_chart_style"></canvas>
+        </div>
     </div>
 
 

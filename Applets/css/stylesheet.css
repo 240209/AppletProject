@@ -1,7 +1,10 @@
-body {
+/*
+SECTION GLOBALS, LAYOUT
+*/
+body {                          /* global font setting */
     font-family: "Calibri", serif;
 }
-.column {
+.column {                       /* 3-column layout */
     float: left;
     padding: 0;
 }
@@ -13,33 +16,34 @@ body {
     padding: 0;
 }
 
-.div_name {
-    font-weight: bold;
-    font-size: larger;
-}
 
-.chart_div {
+/*
+SECTION DIVS
+*/
+.chart_div {                    /* border surrounding whole chart with its parameters */
     width: 94%;
-    margin: 0;
+    margin: 5px 0;
     border-style: solid;
     border-radius: 10px;
     padding: 20px;
 }
-.middle_div {
-    width: 78%;
-    margin: 0 20px;
-    border-style: solid;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.parameters_div {
+.parameters_div {               /* border surrounding one-signal parameters */
     border-style: solid;
     border-radius: 10px;
     padding: 7px 15px;
     border-width: 2px;
 }
-
-.parameters_inside_div {
+.parameters_inside_div {        /* parameters itself (indentation) */
     margin: 5px 10px 0 10px;
+}
+.process_parameters_div {       /* border surrounding whole middle section with modulation/dithering parameters */
+    width: 78%;
+    margin: 5px 20px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 20px;
+}
+.l2_div_name {                  /* name of level 2 div (parameters div, ...) */
+    font-weight: bold;
+    font-size: larger;
 }

@@ -46,7 +46,7 @@ const carrier_chart = new Chart("carrier_chart", {
                 display: true,
                 title: {
                     display: true,
-                    text: 'level [%]'
+                    text: 'level'
                 }
             }
         }
@@ -58,7 +58,6 @@ const carrier_chartUpdate = () => {
     generateCarrierData();
     carrier_chart.update('none');
 };
-
 
 // modulating signal constants
 const modulating_x_values = [];
@@ -105,7 +104,7 @@ const modulating_chart = new Chart("modulating_chart", {
                 display: true,
                 title: {
                     display: true,
-                    text: 'level [%]'
+                    text: 'level'
                 }
             }
         }
@@ -117,7 +116,6 @@ const modulating_chartUpdate = () => {
     generateModulatingData();
     modulating_chart.update('none');
 };
-
 
 // modulated signal constants
 const modulated_x_values = [];
@@ -164,7 +162,7 @@ const modulated_chart = new Chart("modulated_chart", {
                 display: true,
                 title: {
                     display: true,
-                    text: 'level [%]'
+                    text: 'level'
                 }
             }
         }
@@ -175,6 +173,70 @@ const modulated_chartUpdate = () => {
     modulated_y_values.length = 0;
     generateModulatedData();
     modulated_chart.update('none');
+    spectrum_chartUpdate();
+};
+
+// modulated spectrum constants
+const spectrum_x_values = [];
+const spectrum_y_values = [];
+const spectrum_chart = new Chart("spectrum_chart", {
+    type: "bar",
+    data: {
+        labels: spectrum_x_values,
+        datasets: [{
+            label: "spektrum modulovaného signálu",
+            fill: false,
+            pointStyle: false,
+            borderWidth: 1,
+            borderColor: "rgba(0, 0, 255, 0.5)",
+            data: spectrum_y_values
+        }]
+    },
+    options: {
+        barThickness: 1,
+        animation: false,
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Spektrum modulovaného signálu',
+                color: 'rgb(0, 0, 0)',
+                font: { size: 26 }
+            },
+            legend: { display: false },
+        },
+        scales: {
+            x: {
+                display: true,
+                type: 'logarithmic',
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: "frekvence [Hz]"
+                },
+                ticks: {
+                    callback: (index) => {
+                        //if(value % 100 === 0) return value/1000;           // showing only whole milliseconds
+                        return index;           // showing only whole milliseconds
+                    }
+                }
+            },
+            y: {
+                display: true,
+                title: {
+                    display: true,
+                    text: 'amplituda'
+                }
+            }
+        }
+    }
+});
+// also called by modulated_chartUpdate() function
+const spectrum_chartUpdate = () => {
+    spectrum_x_values.length = 0;
+    spectrum_y_values.length = 0;
+    generateSpectrumData();
+    spectrum_chart.update('none');
 };
 
 
@@ -231,6 +293,33 @@ function generateModulatedData(
 
         modulated_y_values.push(eval(value));
         modulated_x_values.push(time);
+    }
+}
+function generateSpectrumData(
+    carr_freq = $("#carrier_frequency_input").val(),
+    mod_freq = $("#modulating_frequency_input").val(),
+    depth = Number.parseFloat($("#modulation_depth_input").val()))
+{
+    let freq = Number(carr_freq) - mod_freq;
+
+    let value = 0;
+
+
+    for (let counter = 0; counter < 3; counter++) {
+
+        if (counter % 2 === 0)
+        {
+            value = 1;
+        }
+        else
+        {
+            value = depth;
+        }
+
+        spectrum_y_values.push(value);
+        spectrum_x_values.push(freq);
+
+        freq += Number(mod_freq);
     }
 }
 

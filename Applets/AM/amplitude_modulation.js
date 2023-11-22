@@ -189,11 +189,12 @@ const spectrum_chart = new Chart("spectrum_chart", {
             pointStyle: false,
             borderWidth: 1,
             borderColor: "rgba(0, 0, 255, 0.5)",
+            backgroundColor: "rgba(0, 0, 255)",
             data: spectrum_y_values
         }]
     },
     options: {
-        barThickness: 1,
+        barThickness: 2,
         animation: false,
         responsive: true,
         plugins: {
@@ -208,17 +209,11 @@ const spectrum_chart = new Chart("spectrum_chart", {
         scales: {
             x: {
                 display: true,
-                type: 'logarithmic',
-                beginAtZero: true,
+                type: 'linear',
+                beginAtZero: false,
                 title: {
                     display: true,
                     text: "frekvence [Hz]"
-                },
-                ticks: {
-                    callback: (index) => {
-                        //if(value % 100 === 0) return value/1000;           // showing only whole milliseconds
-                        return index;           // showing only whole milliseconds
-                    }
                 }
             },
             y: {
@@ -243,6 +238,7 @@ const spectrum_chartUpdate = () => {
 //
 // CHARTS INITIALIZATION //
 //
+let modulation_type = "dsb";
 $(document).ready(() => {
     carrier_chartUpdate();
     modulating_chartUpdate();
@@ -283,9 +279,20 @@ function generateModulatedData(
     carr_freq = $("#carrier_frequency_input").val(),
     mod_freq = $("#modulating_frequency_input").val(),
     depth = Number.parseFloat($("#modulation_depth_input").val()),
-    value = "(1 + depth * Math.sin(mod_arg)) * Math.sin(carr_arg)",
     min = 0, max = 10, step = 0.0125)
 {
+    let value;
+
+    // TO DO: correct equations??
+    switch (modulation_type)
+    {
+        case "dsb-sc": value = "1/2 * Math.sin(mod_arg) * Math.sin(carr_arg)"; break;
+        case "ssb": value = "depth * Math.sin(carr_arg - mod_arg) + Math.sin(carr_arg)"; break;
+        case "ssb-sc": value = "depth * Math.sin(carr_arg - mod_arg)"; break;
+        // dsb
+        default: value = "(1 + depth * Math.sin(mod_arg)) * Math.sin(carr_arg)";
+    }
+
     for (let time = min; time <= max; time += step) {
 
         let mod_arg = mod_freq * 2 * Math.PI * time / 1000;
@@ -300,26 +307,40 @@ function generateSpectrumData(
     mod_freq = $("#modulating_frequency_input").val(),
     depth = Number.parseFloat($("#modulation_depth_input").val()))
 {
-    let freq = Number(carr_freq) - mod_freq;
-
-    let value = 0;
-
-
-    for (let counter = 0; counter < 3; counter++) {
-
-        if (counter % 2 === 0)
+    //default for all
+    spectrum_y_values.push(1);
+    spectrum_x_values.push(Number(carr_freq) - Number(mod_freq));
+    switch (modulation_type)
+    {
+        case "dsb-sc":          // 1 0 1
         {
-            value = 1;
+            spectrum_y_values.push(1);
+            spectrum_x_values.push(Number(carr_freq) + Number(mod_freq));
+
+            break;
         }
-        else
+        case "ssb":          // 1 1 0
         {
-            value = depth;
+            spectrum_y_values.push(Number(depth));
+            spectrum_x_values.push(Number(carr_freq));
+
+            break;
         }
+        case "ssb-sc":      // 1 0 0
+        {
+            break;
+        }
+        // dsb              // 1 1 1
+        default:
+        {
+            spectrum_y_values.push(Number(depth));
+            spectrum_x_values.push(Number(carr_freq));
 
-        spectrum_y_values.push(value);
-        spectrum_x_values.push(freq);
+            spectrum_y_values.push(1);
+            spectrum_x_values.push(Number(carr_freq) + Number(mod_freq));
 
-        freq += Number(mod_freq);
+            break;
+        }
     }
 }
 
@@ -358,4 +379,11 @@ $("#modulation_depth_input").on('input', function () {
 
     // updating selected modulation depth feedback
     $("#modulation_depth_output")[0].textContent = selected_depth.toFixed(2);
+});
+$("#modulation_type_input").on('input', function () {
+
+    modulation_type = $(this).val().trim().toLowerCase();
+
+    // updating chart
+    modulated_chartUpdate();
 });

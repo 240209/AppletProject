@@ -286,9 +286,9 @@ function generateModulatedData(
     // TO DO: correct equations??
     switch (modulation_type)
     {
-        case "dsb-sc": value = "1/2 * Math.sin(mod_arg) * Math.sin(carr_arg)"; break;
-        case "ssb": value = "depth * Math.sin(carr_arg - mod_arg) + Math.sin(carr_arg)"; break;
-        case "ssb-sc": value = "depth * Math.sin(carr_arg - mod_arg)"; break;
+        case "dsb-sc": value = "1/2 * depth * (Math.cos(mod_arg + carr_arg) - Math.sin(carr_arg - mod_arg))"; break;
+        case "ssb": value = "-1/2 * depth * Math.cos(carr_arg - mod_arg) + Math.sin(carr_arg)"; break;
+        case "ssb-sc": value = "-1/2 * depth * Math.cos(carr_arg - mod_arg)"; break;
         // dsb
         default: value = "(1 + depth * Math.sin(mod_arg)) * Math.sin(carr_arg)";
     }
